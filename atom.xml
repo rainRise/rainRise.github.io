@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Mizuki</title>
+  <subtitle>One demo website</subtitle>
+  <link href="https://mizuki.mysqil.com/" rel="alternate" type="text/html"/>
+  <link href="https://mizuki.mysqil.com/atom.xml" rel="self" type="application/atom+xml"/>
+  <id>https://mizuki.mysqil.com/</id>
+  <updated>2026-03-25T13:20:33.220Z</updated>
+  <language>zh_CN</language>
+  <entry>
+    <title>从集合论到位运算，常见位运算技巧分类总结！</title>
+    <link href="https://mizuki.mysqil.com/posts/my-article/" rel="alternate" type="text/html"/>
+    <id>https://mizuki.mysqil.com/posts/my-article/</id>
+    <published>2026-03-25T00:00:00.000Z</published>
+    <updated>2026-03-25T00:00:00.000Z</updated>
+    <summary>把集合运算映射到位运算，一文掌握常见位运算技巧与对应关系</summary>
+    <content type="html"><![CDATA[<h1>从集合论到位运算，常见位运算技巧分类总结！</h1>
+<h2>前言</h2>
+<p>集合可以用二进制数表示：二进制从低到高第 i位为 1 表示 i在集合中，为 0 表示 i不在集合中。例如集合 {0,2,3}可以用二进制数 1101 表示；反过来，二进制数 1101 就对应着集合 {0,2,3}。
+利用这种对应关系，集合运算可以完全等价地转换为位运算，这也是很多算法题高效解法的核心思路。</p>
+<h2>一、集合与集合运算对应</h2>
+<h3>集合运算与位运算对应关系</h3>
+<h3>1.交集</h3>
+<ul>
+<li>集合： A ∩ B</li>
+<li>位运算： a &amp; b</li>
+<li>示例：
+<ul>
+<li>集合：{0,2,3} ∩ {0,1,2}={0,2}</li>
+<li>位运算： 1101 &amp; 0111 = 0101</li>
+</ul>
+</li>
+</ul>
+<h3>2.并集</h3>
+<ul>
+<li>集合： A ∩ B</li>
+<li>位运算： a &amp; b</li>
+<li>示例：
+<ul>
+<li>集合：{0,2,3} ∪ {0,1,2}={0,1,2,3}</li>
+<li>位运算： 1101 | 0111 = 1111</li>
+</ul>
+</li>
+</ul>
+<h3>3.对称差(只属于其中一个集合，而不属于另一个集合的元素组成的集合，也就是不在交集中的元素组成的集合。)</h3>
+<ul>
+<li>集合： A △ B</li>
+<li>位运算： a ^ b</li>
+<li>示例：
+<ul>
+<li>集合：{0,2,3} △ {0,1,2}={1,3}</li>
+<li>位运算： 1101 ^ 0111 = 1010</li>
+</ul>
+</li>
+</ul>
+<h3>4.差集</h3>
+<ul>
+<li>集合： A \ B</li>
+<li>位运算： a &amp; ~b</li>
+<li>示例：
+<ul>
+<li>集合：{0,2,3} \ {1,2}={0,3}</li>
+<li>位运算： 1101 &amp; 1001 = 1001</li>
+</ul>
+</li>
+</ul>
+<h3>5.子集差集(B⊆A时的 A∖B)</h3>
+<ul>
+<li>集合： A \ B, B⊆A</li>
+<li>位运算： a ^ b</li>
+<li>示例：
+<ul>
+<li>集合：{0,2,3} \ {0,1,2}={3}</li>
+<li>位运算： 1101 ^ 0101 = 1000</li>
+</ul>
+</li>
+</ul>
+<h3>6.包含关系</h3>
+<ul>
+<li>集合： A⊆B</li>
+<li>位运算： a &amp; b == a 或 a | b == b 或 (a &amp; ~b) == 0</li>
+<li>示例：
+<ul>
+<li>集合：{0,2} ⊆ {0,2,3}</li>
+<li>位运算： 0101 &amp; 1101 = 0101，0101 | 1101 = 1101</li>
+</ul>
+</li>
+</ul>
+<h2>二、集合与集合运算对应</h2>
+<h4>&lt;&lt; 表示左移，&gt;&gt; 表示右移。</h4>
+<p>注：左移 i 位相当于乘以 2^i，右移 i 位相当于除以 2^i。</p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>集合</th>
+<th>位运算</th>
+<th>集合示例</th>
+<th>位运算示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空集</td>
+<td>$\emptyset$</td>
+<td>$0$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>单元素集合</td>
+<td>${i}$</td>
+<td>$1 &lt;&lt; i$</td>
+<td>${2}$</td>
+<td>$1 &lt;&lt; 2$</td>
+</tr>
+<tr>
+<td>全集</td>
+<td>$U={0,1,2,\dots,n-1}$</td>
+<td>$(1 &lt;&lt; n)-1$</td>
+<td>${0,1,2,3}$</td>
+<td>$(1 &lt;&lt; 4)-1$</td>
+</tr>
+<tr>
+<td>补集</td>
+<td>$\complement_U S=U\setminus S$</td>
+<td>$((1 &lt;&lt; n)-1) \oplus s$</td>
+<td>$U={0,1,2,3}$&lt;br&gt;$\complement_U {1,2}={0,3}$</td>
+<td>$1111 \oplus 0110 = 1001$</td>
+</tr>
+<tr>
+<td>属于</td>
+<td>$i \in S$</td>
+<td>$(s &gt;&gt; i) &amp; 1 = 1$</td>
+<td>$2 \in {0,2,3}$</td>
+<td>$(1101 &gt;&gt; 2) &amp; 1 = 1$</td>
+</tr>
+<tr>
+<td>不属于</td>
+<td>$i \notin S$</td>
+<td>$(s &gt;&gt; i) &amp; 1 = 0$</td>
+<td>$1 \notin {0,2,3}$</td>
+<td>$(1101 &gt;&gt; 1) &amp; 1 = 0$</td>
+</tr>
+<tr>
+<td>添加元素</td>
+<td>$S \cup {i}$</td>
+<td>$s \mid (1 &lt;&lt; i)$</td>
+<td>${0,3} \cup {2}$</td>
+<td>$1001 \mid (1 &lt;&lt; 2)$</td>
+</tr>
+<tr>
+<td>删除元素</td>
+<td>$S \setminus {i}$</td>
+<td>$s &amp; \sim(1 &lt;&lt; i)$</td>
+<td>${0,2,3} \setminus {2}$</td>
+<td>$1101 &amp; \sim(1 &lt;&lt; 2)$</td>
+</tr>
+<tr>
+<td>删除元素（一定在集合中）</td>
+<td>$S \setminus {i}, i\in S$</td>
+<td>$s \oplus (1 &lt;&lt; i)$</td>
+<td>${0,2,3} \setminus {2}$</td>
+<td>$1101 \oplus (1 &lt;&lt; 2)$</td>
+</tr>
+<tr>
+<td>删除最小元素</td>
+<td></td>
+<td>$s &amp; (s-1)$</td>
+<td></td>
+<td>见下</td>
+</tr>
+</tbody>
+</table>
+<pre><code>      s = 101100
+    s-1 = 101011 // 最低位的 1 变成 0，同时 1 右边的 0 都取反，变成 1
+s&amp;(s-1) = 101000
+</code></pre>
+<ul>
+<li>
+<p>如果 s 是 2 的幂，那么 s&amp;(s−1)=0。</p>
+</li>
+<li>
+<p>判断x的二进制中是否有相邻1，用：( (x&gt;&gt;1) &amp; x ) == 0表示无相邻1，非0表示有相邻1</p>
+</li>
+<li>
+<p>判断一个数的二进制是否全为1，只需要判断该数+1后是否进位：（x+1）&amp; x == 0.</p>
+</li>
+<li>
+<p>n &amp; -n：可以得到n的二进制最右边的1所代表的数值（比如n=1010010，lowbit=2即10）</p>
+</li>
+<li>
+<p>n /=（n &amp; -n）*2：除去最右边的1及后面的0，只剩1以前的数字（×2是为了把	1这一位包含进需要移除的部分，把1和后面的0一起打包）</p>
+</li>
+<li>
+<p>快速找到集合s的子集t：t=（t-1）&amp; s (t初始化为s).</p>
+</li>
+<li>
+<p>想要修改某几位二进制，首先需要将二进制的i-j位清除，再移新位进去。</p>
+<p><img src="https://mizuki.mysqil.com/_astro/image.BcFxkzIB_1fizcN.webp" alt="alt text" /></p>
+<pre><code>例：把 B 的二进制位，放到 A 的 [i,j] 位 → 先清 A 的 [i,j] 位，再把 B 移到对应位置，最后合并。
+
+- 把A 的i~j位清零：构造新二进制，i~j是0，其余为1。想要达到这个目的，可以考虑先构造i~j为1，其余位为0，再取反。
+  - 构造长j-i+1的全1串：(1ULL &lt;&lt; (j-i+1)) - 1；
+  - 把全1串移到i位：mask = ((1ULL &lt;&lt; (j-i+1)) - 1) &lt;&lt; i；
+  - 取反得到i~j全为0的掩码：~mask；
+  - 清零A的i~j位：N &amp;= ~mask；
+
+- 把B放到A的i~j位：N | (M &lt;&lt; i)
+</code></pre>
+</li>
+<li>
+<p>想要统计一个数result二进制中1的个数，可以for循环i遍历64位/32位二进制位，
+count += (result&gt;&gt;i) &amp; 1。或者使用库函数__builtin_popcount‘ll’(result)。</p>
+</li>
+<li>
+<p>只包含最小元素的子集，即二进制最低 1 及其后面的 0，也叫 lowbit，可以用 s &amp; -s 算出。</p>
+<pre><code>    s = 101100
+    ~s = 010011
+(~s)+1 = 010100 // ~s=-s-1
+s &amp; -s = 000100 // lowbit
+</code></pre>
+</li>
+<li>
+<p>位掩码：如果想要返回一个用二进制数表示的十进制数，二进制数的1又是根据题目条件依次移位加进去的，那么可以将num按位或1，第i位的1就变成1&lt;&lt;i。
+如果ans是64位无符号整数（uint64_t ans），此时不能写1，应该写成1ULL.</p>
+<p><img src="https://mizuki.mysqil.com/_astro/image-1.C4SSw_f2_17VA03.webp" alt="alt text" /></p>
+</li>
+<li>
+<p>想要实现1和0交替出现，i=0可以与1进行异或操作：i ^= 1</p>
+</li>
+<li>
+<pre><code>c语言中想得到取反相同效果，可以与多个1按位异或。如果直接对一个数取反，会对更高位的0取反：
+</code></pre>
+<p><img src="https://mizuki.mysqil.com/_astro/image-2.Dc31thHf_1IvMJU.webp" alt="alt text" /></p>
+<pre><code>因此仅需要对该数低五位取反：计算num和11111按位异或，11111的个数为num的二进制长度。用__builtin_clz函数计算前导零后，得到长度n，然后1（应该是1u，表示无符号整数）左移n位再减去1得到n位1，再与num按位异或得到取反后的二进制数。
+</code></pre>
+<p><img src="https://mizuki.mysqil.com/_astro/image-3.CB5xJPnR_1mEchV.webp" alt="alt text" /></p>
+</li>
+</ul>
+<h3>c语言中关于二进制的库函数</h3>
+<ul>
+<li>__builtin_clz(num)：统计无符号整数的前导零个数，可以用位数（32/64）减去该结果得到num中的二进制位数</li>
+<li>__builtin_popcount(num)：统计无符号整数二进制中1的个数</li>
+<li>__builtin_parity(num)：统计无符号整数二进制中1的个数的奇偶性，偶数返回0，计数返回1</li>
+<li>__builtin_ctz(num)：统计二进制末尾连续0的个数或者最低位1是第几位。</li>
+<li>__lg(num) + 1：二进制长度</li>
+<li>__lg(num)：集合最大元素</li>
+</ul>
+<h2>三、遍历集合</h2>
+<h3>1. 设元素范围从 0 到 n−1，枚举范围中的元素 i，判断 i 是否在集合 s 中。</h3>
+<pre><code>// 元素范围 0 ~ n-1
+// s 是集合
+for (int i = 0; i &lt; n; i++) {
+    if ((s &gt;&gt; i) &amp; 1) {  // i 在集合 s 中
+        // 处理 i 的逻辑
+    }
+}
+</code></pre>
+<h3>2. 只遍历集合里有的元素</h3>
+<pre><code>int t = s;
+while (t) {
+    int lowbit = t &amp; -t;         // 取最低位 1
+    t ^= lowbit;                 // 删掉这个元素
+    int i = __builtin_ctz(lowbit); // lowbit 对应第几位（C语言内置函数）
+    
+    // 处理 i 的逻辑
+}
+</code></pre>
+<h2>四、枚举集合</h2>
+<h3>§4.1 枚举所有集合</h3>
+<p>设元素范围从 0 到 n−1，从空集 ∅ 枚举到全集 U：</p>
+<pre><code>// 枚举 0 ~ 2^n - 1 所有集合
+for (int s = 0; s &lt; (1 &lt;&lt; n); s++) {
+    // 处理 s
+}
+</code></pre>
+<h3>§4.2 枚举非空子集</h3>
+<p>设集合为 s，从大到小枚举 s 的所有非空子集 sub：</p>
+<pre><code>int sub = s;
+while (sub) {
+    // 处理子集 sub
+    sub = (sub - 1) &amp; s;
+}
+</code></pre>
+<h3>§4.3 枚举 s 的所有子集（包含空集）</h3>
+<p>如果要从大到小枚举 s 的所有子集 sub（从 s 枚举到空集 ∅），可以这样写：</p>
+<pre><code>int sub = s;
+while (1) {
+    // 处理子集 sub
+    
+    if (sub == 0) break;
+    sub = (sub - 1) &amp; s;
+}
+</code></pre>
+<p>或者用do...while</p>
+<pre><code>int sub = s;
+do {
+    // 处理子集 sub
+} while ((sub = (sub - 1) &amp; s) != 0);
+</code></pre>
+<h3>§4.4 枚举超集</h3>
+<p>如果 T 是 S 的子集，那么称 S 是 T 的超集。
+&lt;br&gt;枚举 S，满足 S 是 T 的超集，也是全集 U={0,1,2,…,n−1} 的子集。</p>
+<pre><code>int s = t;
+while (s &lt; (1 &lt;&lt; n)) {
+    // 处理超集 s
+    s = (s + 1) | t;
+}
+</code></pre>
+]]></content>
+    <author>
+      <name>rainRase</name>
+    </author>
+    <category term="位运算"></category>
+  </entry>
+</feed>

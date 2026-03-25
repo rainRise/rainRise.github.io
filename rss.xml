@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Mizuki</title><description>One demo website</description><link>https://mizuki.mysqil.com/</link><language>zh_CN</language><item><title>从集合论到位运算，常见位运算技巧分类总结！</title><link>https://mizuki.mysqil.com/posts/my-article/</link><guid isPermaLink="true">https://mizuki.mysqil.com/posts/my-article/</guid><description>把集合运算映射到位运算，一文掌握常见位运算技巧与对应关系</description><pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;从集合论到位运算，常见位运算技巧分类总结！&lt;/h1&gt;
+&lt;h2&gt;前言&lt;/h2&gt;
+&lt;p&gt;集合可以用二进制数表示：二进制从低到高第 i位为 1 表示 i在集合中，为 0 表示 i不在集合中。例如集合 {0,2,3}可以用二进制数 1101 表示；反过来，二进制数 1101 就对应着集合 {0,2,3}。
+利用这种对应关系，集合运算可以完全等价地转换为位运算，这也是很多算法题高效解法的核心思路。&lt;/p&gt;
+&lt;h2&gt;一、集合与集合运算对应&lt;/h2&gt;
+&lt;h3&gt;集合运算与位运算对应关系&lt;/h3&gt;
+&lt;h3&gt;1.交集&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集合： A ∩ B&lt;/li&gt;
+&lt;li&gt;位运算： a &amp;amp; b&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;ul&gt;
+&lt;li&gt;集合：{0,2,3} ∩ {0,1,2}={0,2}&lt;/li&gt;
+&lt;li&gt;位运算： 1101 &amp;amp; 0111 = 0101&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2.并集&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集合： A ∩ B&lt;/li&gt;
+&lt;li&gt;位运算： a &amp;amp; b&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;ul&gt;
+&lt;li&gt;集合：{0,2,3} ∪ {0,1,2}={0,1,2,3}&lt;/li&gt;
+&lt;li&gt;位运算： 1101 | 0111 = 1111&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3.对称差(只属于其中一个集合，而不属于另一个集合的元素组成的集合，也就是不在交集中的元素组成的集合。)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集合： A △ B&lt;/li&gt;
+&lt;li&gt;位运算： a ^ b&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;ul&gt;
+&lt;li&gt;集合：{0,2,3} △ {0,1,2}={1,3}&lt;/li&gt;
+&lt;li&gt;位运算： 1101 ^ 0111 = 1010&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;4.差集&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集合： A \ B&lt;/li&gt;
+&lt;li&gt;位运算： a &amp;amp; ~b&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;ul&gt;
+&lt;li&gt;集合：{0,2,3} \ {1,2}={0,3}&lt;/li&gt;
+&lt;li&gt;位运算： 1101 &amp;amp; 1001 = 1001&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;5.子集差集(B⊆A时的 A∖B)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集合： A \ B, B⊆A&lt;/li&gt;
+&lt;li&gt;位运算： a ^ b&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;ul&gt;
+&lt;li&gt;集合：{0,2,3} \ {0,1,2}={3}&lt;/li&gt;
+&lt;li&gt;位运算： 1101 ^ 0101 = 1000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;6.包含关系&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;集合： A⊆B&lt;/li&gt;
+&lt;li&gt;位运算： a &amp;amp; b == a 或 a | b == b 或 (a &amp;amp; ~b) == 0&lt;/li&gt;
+&lt;li&gt;示例：
+&lt;ul&gt;
+&lt;li&gt;集合：{0,2} ⊆ {0,2,3}&lt;/li&gt;
+&lt;li&gt;位运算： 0101 &amp;amp; 1101 = 0101，0101 | 1101 = 1101&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;二、集合与集合运算对应&lt;/h2&gt;
+&lt;h4&gt;&amp;lt;&amp;lt; 表示左移，&amp;gt;&amp;gt; 表示右移。&lt;/h4&gt;
+&lt;p&gt;注：左移 i 位相当于乘以 2^i，右移 i 位相当于除以 2^i。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;术语&lt;/th&gt;
+&lt;th&gt;集合&lt;/th&gt;
+&lt;th&gt;位运算&lt;/th&gt;
+&lt;th&gt;集合示例&lt;/th&gt;
+&lt;th&gt;位运算示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;空集&lt;/td&gt;
+&lt;td&gt;$\emptyset$&lt;/td&gt;
+&lt;td&gt;$0$&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;单元素集合&lt;/td&gt;
+&lt;td&gt;${i}$&lt;/td&gt;
+&lt;td&gt;$1 &amp;lt;&amp;lt; i$&lt;/td&gt;
+&lt;td&gt;${2}$&lt;/td&gt;
+&lt;td&gt;$1 &amp;lt;&amp;lt; 2$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;全集&lt;/td&gt;
+&lt;td&gt;$U={0,1,2,\dots,n-1}$&lt;/td&gt;
+&lt;td&gt;$(1 &amp;lt;&amp;lt; n)-1$&lt;/td&gt;
+&lt;td&gt;${0,1,2,3}$&lt;/td&gt;
+&lt;td&gt;$(1 &amp;lt;&amp;lt; 4)-1$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;补集&lt;/td&gt;
+&lt;td&gt;$\complement_U S=U\setminus S$&lt;/td&gt;
+&lt;td&gt;$((1 &amp;lt;&amp;lt; n)-1) \oplus s$&lt;/td&gt;
+&lt;td&gt;$U={0,1,2,3}$&amp;lt;br&amp;gt;$\complement_U {1,2}={0,3}$&lt;/td&gt;
+&lt;td&gt;$1111 \oplus 0110 = 1001$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;属于&lt;/td&gt;
+&lt;td&gt;$i \in S$&lt;/td&gt;
+&lt;td&gt;$(s &amp;gt;&amp;gt; i) &amp;amp; 1 = 1$&lt;/td&gt;
+&lt;td&gt;$2 \in {0,2,3}$&lt;/td&gt;
+&lt;td&gt;$(1101 &amp;gt;&amp;gt; 2) &amp;amp; 1 = 1$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;不属于&lt;/td&gt;
+&lt;td&gt;$i \notin S$&lt;/td&gt;
+&lt;td&gt;$(s &amp;gt;&amp;gt; i) &amp;amp; 1 = 0$&lt;/td&gt;
+&lt;td&gt;$1 \notin {0,2,3}$&lt;/td&gt;
+&lt;td&gt;$(1101 &amp;gt;&amp;gt; 1) &amp;amp; 1 = 0$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;添加元素&lt;/td&gt;
+&lt;td&gt;$S \cup {i}$&lt;/td&gt;
+&lt;td&gt;$s \mid (1 &amp;lt;&amp;lt; i)$&lt;/td&gt;
+&lt;td&gt;${0,3} \cup {2}$&lt;/td&gt;
+&lt;td&gt;$1001 \mid (1 &amp;lt;&amp;lt; 2)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;删除元素&lt;/td&gt;
+&lt;td&gt;$S \setminus {i}$&lt;/td&gt;
+&lt;td&gt;$s &amp;amp; \sim(1 &amp;lt;&amp;lt; i)$&lt;/td&gt;
+&lt;td&gt;${0,2,3} \setminus {2}$&lt;/td&gt;
+&lt;td&gt;$1101 &amp;amp; \sim(1 &amp;lt;&amp;lt; 2)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;删除元素（一定在集合中）&lt;/td&gt;
+&lt;td&gt;$S \setminus {i}, i\in S$&lt;/td&gt;
+&lt;td&gt;$s \oplus (1 &amp;lt;&amp;lt; i)$&lt;/td&gt;
+&lt;td&gt;${0,2,3} \setminus {2}$&lt;/td&gt;
+&lt;td&gt;$1101 \oplus (1 &amp;lt;&amp;lt; 2)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;删除最小元素&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;$s &amp;amp; (s-1)$&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;见下&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre&gt;&lt;code&gt;      s = 101100
+    s-1 = 101011 // 最低位的 1 变成 0，同时 1 右边的 0 都取反，变成 1
+s&amp;amp;(s-1) = 101000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果 s 是 2 的幂，那么 s&amp;amp;(s−1)=0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;判断x的二进制中是否有相邻1，用：( (x&amp;gt;&amp;gt;1) &amp;amp; x ) == 0表示无相邻1，非0表示有相邻1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;判断一个数的二进制是否全为1，只需要判断该数+1后是否进位：（x+1）&amp;amp; x == 0.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;n &amp;amp; -n：可以得到n的二进制最右边的1所代表的数值（比如n=1010010，lowbit=2即10）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;n /=（n &amp;amp; -n）*2：除去最右边的1及后面的0，只剩1以前的数字（×2是为了把	1这一位包含进需要移除的部分，把1和后面的0一起打包）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快速找到集合s的子集t：t=（t-1）&amp;amp; s (t初始化为s).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;想要修改某几位二进制，首先需要将二进制的i-j位清除，再移新位进去。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://mizuki.mysqil.com/_astro/image.BcFxkzIB_1fizcN.webp&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;例：把 B 的二进制位，放到 A 的 [i,j] 位 → 先清 A 的 [i,j] 位，再把 B 移到对应位置，最后合并。
+
+- 把A 的i~j位清零：构造新二进制，i~j是0，其余为1。想要达到这个目的，可以考虑先构造i~j为1，其余位为0，再取反。
+  - 构造长j-i+1的全1串：(1ULL &amp;lt;&amp;lt; (j-i+1)) - 1；
+  - 把全1串移到i位：mask = ((1ULL &amp;lt;&amp;lt; (j-i+1)) - 1) &amp;lt;&amp;lt; i；
+  - 取反得到i~j全为0的掩码：~mask；
+  - 清零A的i~j位：N &amp;amp;= ~mask；
+
+- 把B放到A的i~j位：N | (M &amp;lt;&amp;lt; i)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;想要统计一个数result二进制中1的个数，可以for循环i遍历64位/32位二进制位，
+count += (result&amp;gt;&amp;gt;i) &amp;amp; 1。或者使用库函数__builtin_popcount‘ll’(result)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;只包含最小元素的子集，即二进制最低 1 及其后面的 0，也叫 lowbit，可以用 s &amp;amp; -s 算出。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    s = 101100
+    ~s = 010011
+(~s)+1 = 010100 // ~s=-s-1
+s &amp;amp; -s = 000100 // lowbit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;位掩码：如果想要返回一个用二进制数表示的十进制数，二进制数的1又是根据题目条件依次移位加进去的，那么可以将num按位或1，第i位的1就变成1&amp;lt;&amp;lt;i。
+如果ans是64位无符号整数（uint64_t ans），此时不能写1，应该写成1ULL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://mizuki.mysqil.com/_astro/image-1.C4SSw_f2_17VA03.webp&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;想要实现1和0交替出现，i=0可以与1进行异或操作：i ^= 1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;c语言中想得到取反相同效果，可以与多个1按位异或。如果直接对一个数取反，会对更高位的0取反：
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://mizuki.mysqil.com/_astro/image-2.Dc31thHf_1IvMJU.webp&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;因此仅需要对该数低五位取反：计算num和11111按位异或，11111的个数为num的二进制长度。用__builtin_clz函数计算前导零后，得到长度n，然后1（应该是1u，表示无符号整数）左移n位再减去1得到n位1，再与num按位异或得到取反后的二进制数。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://mizuki.mysqil.com/_astro/image-3.CB5xJPnR_1mEchV.webp&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;c语言中关于二进制的库函数&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;__builtin_clz(num)：统计无符号整数的前导零个数，可以用位数（32/64）减去该结果得到num中的二进制位数&lt;/li&gt;
+&lt;li&gt;__builtin_popcount(num)：统计无符号整数二进制中1的个数&lt;/li&gt;
+&lt;li&gt;__builtin_parity(num)：统计无符号整数二进制中1的个数的奇偶性，偶数返回0，计数返回1&lt;/li&gt;
+&lt;li&gt;__builtin_ctz(num)：统计二进制末尾连续0的个数或者最低位1是第几位。&lt;/li&gt;
+&lt;li&gt;__lg(num) + 1：二进制长度&lt;/li&gt;
+&lt;li&gt;__lg(num)：集合最大元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;三、遍历集合&lt;/h2&gt;
+&lt;h3&gt;1. 设元素范围从 0 到 n−1，枚举范围中的元素 i，判断 i 是否在集合 s 中。&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;// 元素范围 0 ~ n-1
+// s 是集合
+for (int i = 0; i &amp;lt; n; i++) {
+    if ((s &amp;gt;&amp;gt; i) &amp;amp; 1) {  // i 在集合 s 中
+        // 处理 i 的逻辑
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. 只遍历集合里有的元素&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;int t = s;
+while (t) {
+    int lowbit = t &amp;amp; -t;         // 取最低位 1
+    t ^= lowbit;                 // 删掉这个元素
+    int i = __builtin_ctz(lowbit); // lowbit 对应第几位（C语言内置函数）
+    
+    // 处理 i 的逻辑
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;四、枚举集合&lt;/h2&gt;
+&lt;h3&gt;§4.1 枚举所有集合&lt;/h3&gt;
+&lt;p&gt;设元素范围从 0 到 n−1，从空集 ∅ 枚举到全集 U：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 枚举 0 ~ 2^n - 1 所有集合
+for (int s = 0; s &amp;lt; (1 &amp;lt;&amp;lt; n); s++) {
+    // 处理 s
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;§4.2 枚举非空子集&lt;/h3&gt;
+&lt;p&gt;设集合为 s，从大到小枚举 s 的所有非空子集 sub：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int sub = s;
+while (sub) {
+    // 处理子集 sub
+    sub = (sub - 1) &amp;amp; s;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;§4.3 枚举 s 的所有子集（包含空集）&lt;/h3&gt;
+&lt;p&gt;如果要从大到小枚举 s 的所有子集 sub（从 s 枚举到空集 ∅），可以这样写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int sub = s;
+while (1) {
+    // 处理子集 sub
+    
+    if (sub == 0) break;
+    sub = (sub - 1) &amp;amp; s;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;或者用do...while&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int sub = s;
+do {
+    // 处理子集 sub
+} while ((sub = (sub - 1) &amp;amp; s) != 0);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;§4.4 枚举超集&lt;/h3&gt;
+&lt;p&gt;如果 T 是 S 的子集，那么称 S 是 T 的超集。
+&amp;lt;br&amp;gt;枚举 S，满足 S 是 T 的超集，也是全集 U={0,1,2,…,n−1} 的子集。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int s = t;
+while (s &amp;lt; (1 &amp;lt;&amp;lt; n)) {
+    // 处理超集 s
+    s = (s + 1) | t;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded></item></channel></rss>
