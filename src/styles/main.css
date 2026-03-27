@@ -30,15 +30,33 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 自定义鼠标光标变量（图片位于 public/assets/cursor/） */
-:root {
-  --cursor-default: url("/assets/cursor/default.png") 8 8, auto;
-  --cursor-pointer: url("/assets/cursor/pointer.png") 8 2, pointer;
-}
-
 /* 确保平滑滚动 */
 html {
   scroll-behavior: smooth;
+}
+
+/* 恢复默认光标样式 */
+body {
+  cursor: default;
+}
+
+a,
+button,
+[role="button"],
+label,
+summary,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.cursor-pointer,
+.clickable,
+.btn-card,
+.btn-plain,
+.btn-plain,
+.btn-regular,
+.link,
+.link-lg {
+  cursor: pointer;
 }
 
 /* 应用自定义光标，若图片缺失会回退到系统默认 */
