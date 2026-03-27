@@ -16,6 +16,14 @@ import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-di
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
 import { siteConfig } from "./src/config.ts";
+
+const siteUrlObject = new URL(siteConfig.siteURL);
+const normalizedBasePath =
+	siteUrlObject.pathname === "/"
+		? "/"
+		: siteUrlObject.pathname.endsWith("/")
+			? siteUrlObject.pathname
+			: `${siteUrlObject.pathname}/`;
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
@@ -30,7 +38,7 @@ import { rehypeImageWidth } from "./src/plugins/rehype-image-width.mjs";
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.siteURL,
-	base: "/",
+	base: normalizedBasePath,
 	trailingSlash: "always",
 
 	output: "static",
