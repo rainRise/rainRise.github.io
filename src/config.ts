@@ -157,9 +157,7 @@ export const siteConfig: SiteConfig = {
 			enable: true, // 在主页显示自定义文本
 			title: "rainRase", // 主页横幅主标题
 
-			subtitle: [
-				"蹉跎者光阴如梭，有志者岁月如歌。",
-			],
+			subtitle: ["蹉跎者光阴如梭，有志者岁月如歌。"],
 			typewriter: {
 				enable: true, // 启用副标题打字机效果
 
@@ -207,14 +205,14 @@ export const siteConfig: SiteConfig = {
 			fontFamily: "ZenMaruGothic-Medium",
 			fontWeight: "400",
 			localFonts: ["ZenMaruGothic-Medium.ttf"],
-			enableCompress: true, // 启用字体子集优化，减少字体文件大小
+			enableCompress: false, // 禁用字体压缩，避免 woff2 文件未部署问题
 		},
 		cjkFont: {
 			// 中日韩字体 - 作为回退字体
 			fontFamily: "萝莉体 第二版",
 			fontWeight: "500",
 			localFonts: ["萝莉体 第二版.ttf"],
-			enableCompress: true, // 启用字体子集优化，减少字体文件大小
+			enableCompress: false, // 禁用字体压缩，避免 woff2 文件未部署问题
 		},
 	},
 	showLastModified: true, // 控制“上次编辑”卡片显示的开关
@@ -223,19 +221,19 @@ export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
 		desktop: [
 			"assets/desktop-banner/11.jpg",
-				"assets/desktop-banner/12.jpg",
-				"assets/desktop-banner/14.jpg",
-				"assets/desktop-banner/16.jpg",
-				"assets/desktop-banner/17.jpg",
-				"assets/desktop-banner/18.jpg",
+			"assets/desktop-banner/12.jpg",
+			"assets/desktop-banner/14.jpg",
+			"assets/desktop-banner/16.jpg",
+			"assets/desktop-banner/17.jpg",
+			"assets/desktop-banner/18.jpg",
 		], // 桌面横幅图片
 		mobile: [
 			"assets/mobile-banner/1.png",
-				"assets/mobile-banner/2.png",
-				"assets/mobile-banner/3.jpg",
-				"assets/mobile-banner/4.png",
-				"assets/mobile-banner/5.png",
-				"assets/mobile-banner/6.png",
+			"assets/mobile-banner/2.png",
+			"assets/mobile-banner/3.jpg",
+			"assets/mobile-banner/4.png",
+			"assets/mobile-banner/5.png",
+			"assets/mobile-banner/6.png",
 		], // 移动横幅图片
 	}, // 使用本地横幅图片
 	position: "center", // 壁纸位置，等同于 object-position
