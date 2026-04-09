@@ -2,7 +2,7 @@
 title: mysql基本命令
 published: 2026-04-09
 description: '熟悉mysql'
-image: '/assets/desktop-banner/3.jpg'
+image: '/assets/desktop-banner/3.png'
 tags: [题目]
 category: '工具'
 draft: false 
