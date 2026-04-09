@@ -2,7 +2,7 @@
 title: redis基本命令
 published: 2026-04-09
 description: '熟悉redis'
-image: '/assets/desktop-banner/2.png'
+image: 'C:\Users\19160\OneDrive\Desktop\CodeStudy\Mizuki-main-taskDemo\public\assets\desktop-banner\2.png'
 tags: [题目]
 category: '工具'
 draft: false 
