@@ -2,7 +2,7 @@
 title: 上传文件到GitHub指定仓库
 published: 2026-04-09
 description: '文章描述'
-image: 'public\assets\desktop-banner\5.jpeg'
+image: '/assets/desktop-banner/5.jpeg'
 tags: [自主学习]
 category: 工具
 draft: false
