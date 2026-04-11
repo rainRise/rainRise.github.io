@@ -37,5 +37,23 @@ git status
 git add .
 ### 7.提交（必须写描述,""内必须有内容）
 git commit -m "."
-### 8.推送到 GitHub 指定仓库
+### 8.1 第一次推送到 GitHub 指定仓库(必须写全)
+git push -u origin main
+### 8.2 推送到 GitHub 指定仓库
 git push
+### 9.验证远程地址是否正确
+git remote -v
+### 10.创建feature/xx分支
+git checkout -b feature/xx
+### 11.重复6、7步骤
+### 12.推送到远程
+git push -u origin feature/xx
+### 13修改完成后合并到main
+1. GitHub网页点 New Pull Request
+
+2. git checkout main
+
+    git merge feature/xx
+
+    git push origin main
+
