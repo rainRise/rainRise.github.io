@@ -2,7 +2,7 @@
 title: Python基础
 published: 2026-04-10
 description: '文章描述'
-image: '/assets/desktop-banner/6.jpeg'
+image: '/assets/desktop-banner/6.jpg'
 tags: [自主学习]
 category: 语言
 draft: false

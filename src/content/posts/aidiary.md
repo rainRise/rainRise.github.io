@@ -2,7 +2,7 @@
 title: aidiary基础知识点
 published: 2026-04-11
 description: '熟悉框架'
-image: '/assets/desktop-banner/6.jpg'
+image: '/assets/desktop-banner/7.png'
 tags: [自主学习]
 category: '知识点'
 draft: false 
