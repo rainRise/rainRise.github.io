@@ -2,7 +2,7 @@
 title: 博客写作与发布操作指南
 published: 2026-04-11
 description: 'Mizuki 博客项目的写作与部署流程说明'
-image: ''
+image: '/assets/desktop-banner/8.png'
 tags: [指南]
 category: 文档
 draft: false
