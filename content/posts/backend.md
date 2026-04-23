@@ -913,27 +913,4 @@ lang: 'zh-CN'
 
 * * *
 
-## 4.13 `DemoApplicationTests.java`
-
-    package com.example.demo;
-    // 测试包
-    
-    import org.junit.jupiter.api.Test;
-    // JUnit 5 测试注解
-    
-    import org.springframework.boot.test.context.SpringBootTest;
-    // Spring Boot 测试注解
-    
-    @SpringBootTest
-    // 启动完整 Spring 上下文
-    class DemoApplicationTests {
-    
-        @Test
-        // 测试方法
-        void contextLoads() {
-            // 空测试，验证容器能否正常启动
-        }
-    }
-
-
 
