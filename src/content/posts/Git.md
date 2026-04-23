@@ -22,6 +22,8 @@ git add .
 git commit -m "."
 ### 6.推送到 GitHub 指定仓库
 git push
+### 7.删除之前错误的origin远程链接
+git remote remove origin
 
 ## 二、GitHub上还没有这个文件的仓库
 ### 1.进入该文件目录，进入cmd
