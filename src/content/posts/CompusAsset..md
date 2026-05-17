@@ -1,8 +1,8 @@
 ---
-title: backend 基础知识点
+title: CampusAsset Spring Boot 基础知识点
 published: 2026-05-15
 description: 'SpringBoot'
-image: '/assets/desktop-banner/9.png'
+image: '/assets/desktop-banner/10.png'
 tags: [自主学习]
 category: '知识点'
 draft: false 
